@@ -110,7 +110,7 @@ export const activateSession = async (ctx: RouterContext<string>) => {
 
     setTimeout(async () => {
       await changeSessionState(userId, gameId, jwt, true);
-    }, 2 * 60 * 1000 * 1000);
+    }, 2 * 60 * 1000);
   } catch (error) {
     ctx.response.body = { message: error.message };
     ctx.response.status = 500;

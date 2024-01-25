@@ -105,16 +105,13 @@ export const validateSession = async (
   const userQuery = { _id: new ObjectId(userId) };
   const selectedUser = await userDbClient.findOne(userQuery);
   const session: Session | undefined = selectedUser?.session;
-  console.log(
-    session?.gameId === gameId &&
-      session?.id === userId + "-" + gameId &&
-      session?.jwt === jwt
-  );
+
   if (
     session?.gameId === gameId &&
     session?.id === userId + "-" + gameId &&
     session?.jwt === jwt
   ) {
+    // await changeSessionState(userId,gameId,jwt,true)
     return { secret: session.secret };
   } else {
     console.log("gotten here 123");

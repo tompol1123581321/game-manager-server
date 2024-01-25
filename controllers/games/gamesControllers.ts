@@ -27,7 +27,7 @@ export const downloadGame = async (ctx: RouterContext<string>) => {
     console.log(checkResponse);
 
     if (checkResponse) {
-      const zipFilePath = join(Deno.cwd(), "games", "python_raven_game.zip");
+      const zipFilePath = join(Deno.cwd(), "games", `${requestBody.gameId}.zip`);
 
       if (!(await Deno.stat(zipFilePath).catch(() => null))) {
         ctx.response.status = 404;
@@ -36,7 +36,6 @@ export const downloadGame = async (ctx: RouterContext<string>) => {
       }
       await send(ctx, zipFilePath, {
         root: "/",
-        index: "testFolder.zip",
       });
     }
   } catch (e) {
